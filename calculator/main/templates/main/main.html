@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PSU Calculator</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/PScalculator.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="/" class="nav-logo">
+                    <i class="fas fa-laptop"></i>
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="/services" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="/about-us" class="nav-link">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <img src="{% static 'images/GAm.jpg' %}" alt="Power Supply Unit" />
+    </div>
+
+    <div class="container-form-group" id="power__calculator">
+        <h3 class="sub__title">Choose Your Components</h3>
+
+        <!-- CPU -->
+        <div class="form-group dropdown-container" id="cpuDropdownContainer">
+            <div class="template__three-select-filters">
+                <div class="category">
+                    <div class="category__title category--show">
+                        <img src="{% static 'images/cpu.png' %}" alt="" />
+                        <div class="title__text">CPU</div>
+                    </div>
+                </div>
+                <div class="filter">
+                    <input type="text" id="cpuInput" placeholder="Enter CPU Model" />
+                    <div class="dropdown-content" id="cpuDropdownContent">
+                        <select size="10" id="cpuOptions">
+                            {% for cpu in cpus %}
+                                <option value="{{ cpu.id }}" data-subtitle="{{ cpu.power_usage }}">{{ cpu.model }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="overclock-section">
+                        <label>
+                            <input type="checkbox" id="cpuOverclockCheckbox"> Overclock
+                        </label>
+                        <div class="overclock-slider" id="cpuOverclockSliderContainer" style="display: none;">
+                            <label for="cpuOverclockPercentage"> <span id="cpuOverclockValue">10</span> % </label>
+                            <input type="range" id="cpuOverclockPercentage" min="0" max="25" value="10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GPU -->
+        <div class="gpu-container">
+            <div class="form-group dropdown-container gpu-block" id="gpuDropdownContainer0">
+                <div class="template__three-select-filters">
+                    <div class="category">
+                        <div class="category__title category--show">
+                            <img src="{% static 'images/gpu2.png' %}" alt="" />
+                            <div class="title__text">GPU</div>
+                        </div>
+                    </div>
+                    <div class="filter">
+                        <input type="text" id="gpuInput0" placeholder="Enter GPU Model" />
+                        <div class="dropdown-content" id="gpuDropdownContent0">
+                            <select size="10" id="gpuOptions0" class="gpu-options">
+                                {% for gpu in gpus %}
+                                    <option value="{{ gpu.id }}" data-subtitle="{{ gpu.power_usage }}">{{ gpu.model }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="overclock-section">
+                            <label>
+                                <input type="checkbox" id="gpuOverclockCheckbox0"> Overclock
+                            </label>
+                            <div class="overclock-slider" id="gpuOverclockSliderContainer0" style="display: none;">
+                                <label for="gpuOverclockPercentage0"> <span id="gpuOverclockValue0">10</span> % </label>
+                                <input type="range" id="gpuOverclockPercentage0" min="0" max="25" value="10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="add__btn" id="addNewGpuOption">
+            <button><i class="fas fa-plus"></i> Add GPU</button>
+        </div>
+
+        <!-- RAM -->
+        <div class="dropdown-container form-group">
+            <div class="template__three-select-filters">
+                <div class="category">
+                    <div class="category__title category--show">
+                        <img src="{% static 'images/ram.png' %}" alt="" />
+                        <div class="title__text">RAM</div>
+                    </div>
+                </div>
+                <div class="filter">
+                    <select id="ramType">
+                        <option value="DDR3" data-subtitle="6">DDR3</option>
+                        <option value="DDR4" data-subtitle="10">DDR4</option>
+                        <option value="DDR5" data-subtitle="15">DDR5</option>
+                    </select>
+                    <div class="h-g20"></div>
+                    <input type="number" id="ramQuantity" min="0" value="0" placeholder="Number of Modules" />
+                </div>
+            </div>
+        </div>
+
+        <!-- PCI-e -->
+        <div class="form-group dropdown-container">
+            <div class="template__three-select-filters">
+                <div class="category">
+                    <div class="category__title category--show">
+                        <img src="{% static 'images/pcie.png' %}" alt="" />
+                        <div class="title__text">PCI-e</div>
+                    </div>
+                </div>
+                <div class="filter">
+                    <div class="pci-grid">
+                        <div>
+                            <label for="pciQuantity1">PCI-e x1</label>
+                            <input type="number" class="pciQuantity" id="pciQuantity1" min="0" value="0" />
+                        </div>
+                        <div>
+                            <label for="pciQuantity2">PCI-e x4</label>
+                            <input type="number" class="pciQuantity" id="pciQuantity2" min="0" value="0" />
+                        </div>
+                        <div>
+                            <label for="pciQuantity3">PCI-e x8</label>
+                            <input type="number" class="pciQuantity" id="pciQuantity3" min="0" value="0" />
+                        </div>
+                        <div>
+                            <label for="pciQuantity4">PCI-e x16</label>
+                            <input type="number" class="pciQuantity" id="pciQuantity4" min="0" value="0" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Storages -->
+        <div class="form-group dropdown-container">
+            <div class="template__three-select-filters">
+                <div class="category">
+                    <div class="category__title category--show">
+                        <img src="{% static 'images/storages.png' %}" alt="" />
+                        <div class="title__text">Storages</div>
+                    </div>
+                </div>
+                <div class="filter">
+                    <div class="storage-grid">
+                        <div>
+                            <label for="storageQuantity1">HDD Drive</label>
+                            <input type="number" class="pciQuantity" id="storageQuantity1" min="0" value="0" />
+                        </div>
+                        <div>
+                            <label for="storageQuantity2">SATA SSD</label>
+                            <input type="number" class="pciQuantity" id="storageQuantity2" min="0" value="0" />
+                        </div>
+                        <div>
+                            <label for="storageQuantity3">M.2 SSD</label>
+                            <input type="number" class="pciQuantity" id="storageQuantity3" min="0" value="0" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optical Drive -->
+        <div class="form-group dropdown-container">
+            <div class="template__three-select-filters">
+                <div class="category">
+                    <div class="category__title category--show">
+                        <i class="fas fa-compact-disc"></i>
+                        <div class="title__text">Optical Drive</div>
+                    </div>
+                </div>
+                <div class="filter">
+                    <select id="opticalDriveType">
+                        <option value="" selected data-subtitle="0">None</option>
+                        <option value="CD-ROM / CD-RW Drive" data-subtitle="20">CD-ROM / CD-RW Drive</option>
+                        <option value="DVD-ROM / DVD-RW / DVD+RW Drive" data-subtitle="25">DVD-ROM / DVD-RW / DVD+RW Drive</option>
+                        <option value="DVD / CD-RW Combo Drive" data-subtitle="30">DVD / CD-RW Combo Drive</option>
+                        <option value="Blu-Ray Drive" data-subtitle="25">Blu-Ray Drive</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fans -->
+        <div class="form-group dropdown-container">
+            <div class="template__three-select-filters">
+                <div class="category">
+                    <div class="category__title category--show">
+                        <i class="fas fa-fan"></i>
+                        <div class="title__text">Fans</div>
+                    </div>
+                </div>
+                <div class="filter">
+                    <input type="number" id="fanQuantity" min="0" value="0" placeholder="Number of Fans" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Result -->
+        <div class="combined-output" id="totalPower">
+            The system consumes: <strong>0W</strong><br>
+            Recommended power supply: <strong>0W</strong>
+        </div>
+        <button class="reset-button" id="resetButton"><i class="fas fa-undo"></i> Reset</button>
+    </div>
+
+    <script>
+    window.STATIC_URL = "{% static '' %}";
+    window.gpuOptionsHtml = `{% for gpu in gpus %}
+        <option value="{{ gpu.id }}" data-subtitle="{{ gpu.power_usage }}">{{ gpu.model }}</option>
+    {% endfor %}`.trim() || `
+        <option value="1" data-subtitle="150">NVIDIA GTX 1080</option>
+        <option value="2" data-subtitle="250">NVIDIA RTX 3080</option>
+        <option value="3" data-subtitle="350">NVIDIA RTX 4090</option>
+    `.trim();
+    </script>
+
+    <script type="module" src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

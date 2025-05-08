@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/PScalculator.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="/" class="nav-logo">
+                    <i class="fas fa-laptop"></i>
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/services" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="/about-us" class="nav-link">About Us</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <img src="{% static 'images/GAm.jpg' %}" alt="Power Supply Unit" />
+    </div>
+
+    <div class="container-form-group">
+        <h2 class="sub__title">Services</h2>
+
+        <!-- Section 1: List of Services -->
+        <div class="section">
+            <h4 class="section-title"><i class="fas fa-tools"></i> What We Offer</h4>
+            <div class="section-content">
+                <ul class="services-list">
+                    <li>
+                        <i class="fas fa-calculator"></i>
+                        <span>Power Supply Wattage Calculation</span>
+                        <p>Find out which power supply unit is needed for your PC configuration to avoid overloads.</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-desktop"></i>
+                        <span>Computer Configuration Analysis</span>
+                        <p>We will evaluate your system and provide recommendations to improve performance.</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Component Selection Advice</span>
+                        <p>We will help you choose the best components for your budget and needs.</p>
+                    </li>
+                    <li>
+                        <i class="fas fa-bolt"></i>
+                        <span>Power Consumption Optimization</span>
+                        <p>We will advise on how to reduce your PC's power consumption without sacrificing performance.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 2: Useful Resources -->
+        <div class="section">
+            <h4 class="section-title"><i class="fas fa-link"></i> Useful Resources</h4>
+            <div class="section-content">
+                <p>Here are some helpful websites to assist you with component selection, calculations, and optimization:</p>
+                <ul class="resources-list">
+                    <li>
+                        <a href="https://pcpartpicker.com/" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-cogs"></i> PCPartPicker
+                        </a>
+                        <p>A tool for selecting and checking the compatibility of PC components.</p>
+                    </li>
+                    <li>
+                        <a href="https://www.userbenchmark.com/" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-tachometer-alt"></i> UserBenchmark
+                        </a>
+                        <p>Compare component performance and analyze your system.</p>
+                    </li>
+                    <li>
+                        <a href="https://www.tomshardware.com/" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-newspaper"></i> Tom’s Hardware
+                        </a>
+                        <p>Reviews, articles, and tips on choosing hardware.</p>
+                    </li>
+                    <li>
+                        <a href="https://www.anandtech.com/" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-book"></i> AnandTech
+                        </a>
+                        <p>In-depth technical reviews and analysis of computer components.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 3: Call to Action -->
+        <div class="section cta-section">
+            <h4 class="section-title"><i class="fas fa-rocket"></i> Ready to Get Started?</h4>
+            <div class="section-content">
+                <p>Try our power calculator now or contact us for a consultation!</p>
+                <a href="/" class="cta-button"><i class="fas fa-calculator"></i> Calculate Power</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
