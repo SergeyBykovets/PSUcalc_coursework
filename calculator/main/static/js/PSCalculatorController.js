@@ -24,7 +24,7 @@ class PSCalculatorController {
             onReset: this.onReset.bind(this),
         });
 
-        // Слухаємо подію deleteGpu для оновлення моделі
+       
         window.addEventListener('deleteGpu', (event) => {
             const { index } = event.detail;
             console.log('Received deleteGpu event for index:', index);
