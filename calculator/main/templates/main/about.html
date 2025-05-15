@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
+    {% load static %}
     <link rel="stylesheet" href="../../static/css/PScalculator.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
@@ -22,6 +23,10 @@
         </div>
       </nav>
     </header>
+
+    <div class="banner">
+        <img src="{% static 'images/GAm.jpg' %}" alt="Power Supply Unit" />
+    </div>
 
     <div class="container-form-group">
         <h2 class="sub__title">About Us</h2>
@@ -44,16 +49,19 @@
                         <i class="fas fa-user-circle"></i>
                         <h5>Sergey Bykovets</h5>
                         <p>Developer</p>
+                        <a href="https://t.me/sergeybykovets" class="cta-button">Write</a>
                     </div>
                     <div class="team-member">
                         <i class="fas fa-user-circle"></i>
                         <h5>Petro Ustimchik</h5>
                         <p>Developer</p>
+                        <a href="https://t.me/pepko0007" class="cta-button">Write</a>
                     </div>
-                    <div class="team-member">
-                        <i class="fas fa-user-circle"></i>
+                    <div class="team-member centered-member">
+                        <i class="fas fa-user-circle" class></i>
                         <h5>Oleksiy Fariga</h5>
                         <p>Developer</p>
+                        <a href="https://t.me/LLI_a_l_u_N" class="cta-button">Write</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +72,10 @@
             <h4 class="section-title"><i class="fas fa-envelope"></i> Contact Us</h4>
             <div class="section-content">
                 <p>Have questions or need a consultation? Write to us!</p>
-                <a href="mailto:support@example.com" class="cta-button"><i class="fas fa-envelope"></i> Write to Us</a>
+                <a href="mailto:cbykovec@gmail.com?subject=Inquiry%20from%20Website" class="cta-button">
+                    <i class="fas fa-envelope"></i>
+                    Write to Us
+                </a>
             </div>
         </div>
     </div>

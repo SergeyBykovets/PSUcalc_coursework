@@ -143,8 +143,9 @@ header {
 /* Секція: Наша команда */
 .team-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 375px)); /* Фіксована ширина для всіх елементів */
     gap: 20px;
+    justify-content: center; /* Центрування елементів у сітці */
 }
 
 .team-member {
@@ -154,6 +155,8 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Забезпечує однакову ширину */
+    max-width: 375px; /* Максимальна ширина для відповідності дизайну */
 }
 
 .team-member:hover {
@@ -183,6 +186,11 @@ header {
 .team-member p:first-of-type {
     font-weight: 500;
     color: #666;
+}
+
+.centered-member {
+    grid-column: 1 / -1; /* Займає весь рядок */
+    margin: 0 auto; /* Центрування блоку в рядку */
 }
 
 /* Заклик до дії (CTA) */
@@ -726,16 +734,16 @@ label {
     }
 
     .overclock-slider input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 8px;
-    border-radius: 4px;
-    outline: none;
-    cursor: pointer;
-    transition: background 0.2s ease;
-    position: relative;
-    background: linear-gradient(to right, #007bff 0%, #e0e0e0 0%); /* Початкове значення 0% */
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 8px;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+        transition: background 0.2s ease;
+        position: relative;
+        background: linear-gradient(to right, #007bff 0%, #e0e0e0 0%); /* Початкове значення 0% */
     }
 
     .overclock-slider input[type="range"]::-webkit-slider-thumb,
@@ -745,8 +753,9 @@ label {
         top: -5px; /* Корекція для адаптивного дизайну */
     }
 
-
-
+    .centered-member {
+        margin: 0 auto;
+    }
 }
 
 @media (max-width: 480px) {

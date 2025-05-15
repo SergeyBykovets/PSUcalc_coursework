@@ -15,7 +15,6 @@ class PSCalculatorModel {
     }
 
     setCpuOverclock(isOverclocked, percentage) {
-        console.log('Setting CPU overclock:', { isOverclocked, percentage });
         this.cpu.overclock = isOverclocked;
         this.cpu.overclockPercentage = percentage;
     }

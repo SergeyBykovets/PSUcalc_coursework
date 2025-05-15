@@ -177,9 +177,10 @@ class PSCalculatorView {
 
     updatePower(total, recommended) {
         console.log('Updating UI with:', { total, recommended });
+        // Завжди відображаємо "+20%" у тексті
         this.totalPower.innerHTML = `
-            The system consumes: <strong>${total}W</strong><br>
-            Recommended power supply: <strong>${recommended}W</strong>
+            The system consumes: <strong>${total || 0}W</strong><br>
+            Recommended power supply(+20%): <strong>${recommended || 0}W</strong>
         `;
     }
 
