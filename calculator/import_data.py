@@ -3,10 +3,10 @@ import os
 import django
 
 # Налаштування Django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'calculator.settings')  # Замініть 'calculator' на назву вашого проекту
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'calculator.settings')
 django.setup()
 
-from main.models import CPU, GPU  # Замініть 'myapp' на назву вашого додатку
+from main.models import CPU, GPU
 
 CPU.objects.all().delete()
 GPU.objects.all().delete()
