@@ -1,9 +1,12 @@
 __pycache__/
 *.pyc
+calculator/__pycache__/
+calculator/main/__pycache__/
+calculator/main/migrations/__pycache__/
 .coverage
-tmp/
 coverage/
+tmp/
+htmlcov/
 node_modules/
 db.sqlite3
-htmlcov/
 ./main/test/__pycache__/
