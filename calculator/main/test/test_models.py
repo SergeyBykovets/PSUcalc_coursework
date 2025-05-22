@@ -15,6 +15,7 @@ class CPUModelTest(TestCase):
         cpu = CPU.objects.create(model='AMD Ryzen AI 777', power_usage=75)
         self.assertEqual(cpu.power_usage, 75)
         self.assertEqual(cpu.model, 'AMD Ryzen AI 777')
+        self.assertIsInstance(cpu, CPU)
 
 
 class GPUModelTest(TestCase):
@@ -28,3 +29,4 @@ class GPUModelTest(TestCase):
         gpu = GPU.objects.create(model='NVIDIA GTX 5055', power_usage=320)
         self.assertEqual(gpu.model, 'NVIDIA GTX 5055')
         self.assertEqual(gpu.power_usage, 320)
+        self.assertIsInstance(gpu, GPU)
