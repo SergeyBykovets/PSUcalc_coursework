@@ -1,4 +1,16 @@
+/**
+ * Controller class.
+ * Connects the View and Model, handles UI elements and updates state and view accordingly.
+ */
 class PSCalculatorController {
+    /**
+     * Constructor
+     * Initializes the controller with the given model and view,
+     * binds UI events to handler methods.
+     *
+     * @param {Object} model - Instance of PSCalculatorModel.
+     * @param {Object} view - Instamce of PSCalculatorView.
+     */
     constructor(model, view) {
         this.model = model;
         this.view = view;
@@ -32,14 +44,17 @@ class PSCalculatorController {
         });
     }
 
+    /** Handles focus event on CPU input filtering dropdown options. */
     onCpuInputFocus() {
         this.view.filterOptions(this.view.cpuInput, this.view.cpuOptions.options, this.view.cpuDropdownContent);
     }
 
+    /** Handles input event on CPU field to filter matching dropdown options. */
     onCpuInput() {
         this.view.filterOptions(this.view.cpuInput, this.view.cpuOptions.options, this.view.cpuDropdownContent);
     }
 
+    /** Handles CPU selection from dropdown and updates model. */
     onCpuSelect() {
         const selectedOption = this.view.cpuOptions.options[this.view.cpuOptions.selectedIndex];
         if (selectedOption.value) {
@@ -50,6 +65,7 @@ class PSCalculatorController {
         }
     }
 
+    /** Handles toggling of CPU overclock and updates model + slider UI. */
     onCpuOverclockChange() {
         const checkbox = this.view.cpuOverclockCheckbox;
         const slider = this.view.cpuOverclockPercentage;
@@ -73,6 +89,11 @@ class PSCalculatorController {
         this.updatePower();
     }
 
+    /**
+     * Hides CPU and GPU dropdowns when clicking outside them.
+     *
+     * @param {MouseEvent} event
+     */
     onDocumentClick(event) {
         if (!this.view.cpuInput.contains(event.target) && !this.view.cpuDropdownContent.contains(event.target)) {
             this.view.cpuDropdownContent.style.display = 'none';
@@ -89,6 +110,7 @@ class PSCalculatorController {
         });
     }
 
+    /** Adds a new GPU block to the view and model, and binds its events. */
     onAddGpu() {
         this.gpuCount++;
         console.log('Adding new GPU, current count:', this.gpuCount);
@@ -104,6 +126,11 @@ class PSCalculatorController {
         this.updatePower();
     }
 
+    /**
+     * Filters GPU options by input (focus or typing).
+     *
+     * @param {number} index - Index of the GPU block.
+     */
     onGpuInputFocus(index) {
         const gpuInput = document.getElementById(`gpuInput${index}`);
         const gpuOptions = document.getElementById(`gpuOptions${index}`);
@@ -111,6 +138,11 @@ class PSCalculatorController {
         this.view.filterOptions(gpuInput, gpuOptions.options, gpuDropdownContent);
     }
 
+    /**
+     * Filters GPU options when user types.
+     *
+     * @param {number} index
+     */
     onGpuInput(index) {
         const gpuInput = document.getElementById(`gpuInput${index}`);
         const gpuOptions = document.getElementById(`gpuOptions${index}`);
@@ -118,6 +150,11 @@ class PSCalculatorController {
         this.view.filterOptions(gpuInput, gpuOptions.options, gpuDropdownContent);
     }
 
+    /**
+     * Selects a GPU from dropdown, updates model and UI.
+     *
+     * @param {number} index
+     */
     onGpuSelect(index) {
         const gpuOptions = document.getElementById(`gpuOptions${index}`);
         const selectedOption = gpuOptions.options[gpuOptions.selectedIndex];
@@ -130,6 +167,11 @@ class PSCalculatorController {
         }
     }
 
+    /**
+     * Handles GPU overclock toggle and slider value update.
+     *
+     * @param {number} index
+     */
     onGpuOverclockChange(index) {
         const checkbox = document.getElementById(`gpuOverclockCheckbox${index}`);
         const slider = document.getElementById(`gpuOverclockPercentage${index}`);
@@ -151,11 +193,16 @@ class PSCalculatorController {
         this.updatePower();
     }
 
+    /**
+     * Removes GPU block and updates model and power calculations.
+     *
+     * @param {number} index
+     */
     onDeleteGpu(index) {
         console.log('Processing delete GPU:', index);
         this.model.removeGpu(index);
         this.gpuCount = this.view.gpuBlocks.length;
-        // Переприв’язуємо обробники для всіх блоків
+        // Rebinding handlers for all blocks
         this.view.gpuBlocks.forEach((block, i) => {
             if (block) {
                 this.view.bindGpuEvents(i, {
@@ -170,12 +217,14 @@ class PSCalculatorController {
         this.updatePower();
     }
 
+    /** Handles chenges in RAM configuration. */
     onRamChange() {
         const powerPerModule = parseInt(this.view.ramType.selectedOptions[0]?.getAttribute('data-subtitle') || 0);
         this.model.setRam(this.view.ramType.value, parseInt(this.view.ramQuantity.value) || 0, powerPerModule);
         this.updatePower();
     }
 
+    /** Updates model when PCI slot counts change. */
     onPciChange() {
         this.model.setPci(
             parseInt(this.view.pciQuantities[0].value) || 0,
@@ -186,6 +235,7 @@ class PSCalculatorController {
         this.updatePower();
     }
 
+    /** Updates model when storage device counts change. */
     onStorageChange() {
         this.model.setStorage(
             parseInt(this.view.storageQuantities[0].value) || 0,
@@ -195,17 +245,20 @@ class PSCalculatorController {
         this.updatePower();
     }
 
+    /** Updates model when optical drive is changed. */
     onOpticalDriveChange() {
         const power = parseInt(this.view.opticalDriveType.selectedOptions[0]?.getAttribute('data-subtitle') || 0);
         this.model.setOpticalDrive(this.view.opticalDriveType.value, power);
         this.updatePower();
     }
 
+     /** Updates model when fan quantity is changed. */
     onFansChange() {
         this.model.setFans(parseInt(this.view.fanQuantity.value) || 0);
         this.updatePower();
     }
 
+    /** Resets both model and view to initial state. */
     onReset() {
         this.model.reset();
         this.view.reset(window.STATIC_URL, window.gpuOptionsHtml);
@@ -220,6 +273,7 @@ class PSCalculatorController {
         this.updatePower();
     }
 
+    /** Recalculates power consumption and updates view display. */
     updatePower() {
         const { total, recommended } = this.model.calculatePower();
         this.view.updatePower(total, recommended);

@@ -1,3 +1,8 @@
+/**
+ * View class for displaying UI components and handling DOM elements.
+ * It updates the interface and manages UI elements.
+ */
+
 class PSCalculatorView {
     constructor() {
         this.cpuInput = document.getElementById('cpuInput');
@@ -31,6 +36,11 @@ class PSCalculatorView {
         }
     }
 
+    /**
+     * Binds event handlers to DOM elements.
+     *
+     * @param {Object} handlers - An object with event callbacks.
+     */
     bindEvents(handlers) {
         console.log('Binding events:', handlers);
         this.cpuInput.addEventListener('focus', handlers.onCpuInputFocus);
@@ -57,6 +67,12 @@ class PSCalculatorView {
         this.resetButton.addEventListener('click', handlers.onReset);
     }
 
+    /**
+     * Binds GPU-specific events to GPU input and dropdown elements.
+     *
+     * @param {number} index - GPU index.
+     * @param {Object} handlers - Object with GPU event handlers.
+     */
     bindGpuEvents(index, handlers) {
         console.log('Binding GPU events for index:', index);
         const gpuInput = document.getElementById(`gpuInput${index}`);
@@ -82,6 +98,14 @@ class PSCalculatorView {
         gpuOverclockPercentage.addEventListener('input', () => handlers.onGpuOverclockChange(index));
     }
 
+    /**
+     * Adds a new GPU block to the DOM.
+     *
+     * @param {number} index - GPU block index.
+     * @param {string} gpuOptionsHtml - HTML for GPU options.
+     * @param {string} staticUrl - URL path to static assets.
+     * @param {Function} onDeleteGpu - Callback for delete action.
+     */
     addGpuBlock(index, gpuOptionsHtml, staticUrl, onDeleteGpu) {
         console.log('Adding GPU block:', index);
         console.log('gpuOptionsHtml:', gpuOptionsHtml);
@@ -129,14 +153,19 @@ class PSCalculatorView {
         });
     }
 
+    /**
+     * Delete GPU block from DOM and updates GPU block array.
+     *
+     * @param {number} index - Index of GPU block to delete.
+     */
     deleteGpuBlock(index) {
         console.log('Deleting GPU block:', index);
         if (this.gpuBlocks[index]) {
             this.gpuBlocks[index].remove();
             this.gpuBlocks[index] = null;
-            // Очищаємо null-елементи та оновлюємо індекси
+            // Clearing null-elements and updating indexes.
             this.gpuBlocks = this.gpuBlocks.filter(block => block !== null);
-            // Переіндексуємо блоки
+            // Reindexing blocks.
             this.gpuBlocks.forEach((block, i) => {
                 if (block) {
                     block.id = `gpuDropdownContainer${i}`;
@@ -157,16 +186,16 @@ class PSCalculatorView {
                     if (sliderContainer) sliderContainer.id = `gpuOverclockSliderContainer${i}`;
                     if (delBtn) {
                         delBtn.id = `delNewGpuOption${i}`;
-                        // Переприв’язуємо обробник для кнопки видалення
+                        // Rebinding handler for delete button
                         const deleteButton = delBtn.querySelector('button');
-                        // Видаляємо старі обробники
+                        // Delete old handlers.
                         const newButton = deleteButton.cloneNode(true);
                         deleteButton.parentNode.replaceChild(newButton, deleteButton);
                         newButton.addEventListener('click', () => {
                             console.log('Delete button clicked for GPU:', i);
                             this.deleteGpuBlock(i);
-                            // Викликаємо onDeleteGpu з контролера
-                            window.dispatchEvent(new CustomEvent('deleteGpu', { detail: { index: i } }));
+                            // Calling onDeleteGpu from Controller
+                            window.dispatchEvent(new CustomEvent('deleteGpu', {detail: {index: i}}));
                         });
                     }
                     console.log(`Reindexed GPU block to index: ${i}`);
@@ -175,8 +204,14 @@ class PSCalculatorView {
         }
     }
 
+    /**
+     * Updates the displayed power values.
+     *
+     * @param {number} total - Total power in watts.
+     * @param {number} recommended - Recommended power with margin.
+     */
     updatePower(total, recommended) {
-        console.log('Updating UI with:', { total, recommended });
+        console.log('Updating UI with:', {total, recommended});
         // Завжди відображаємо "+20%" у тексті
         this.totalPower.innerHTML = `
             The system consumes: <strong>${total || 0}W</strong><br>
@@ -184,6 +219,12 @@ class PSCalculatorView {
         `;
     }
 
+    /**
+     * Resets the view and UI to its initial state.
+     *
+     * @param {string} staticUrl - Static resource URL for images.
+     * @param {string} gpuOptionsHtml - HTML string of GPU options.
+     */
     reset(staticUrl, gpuOptionsHtml) {
         console.log('Resetting view...');
         this.cpuInput.value = '';
@@ -231,6 +272,13 @@ class PSCalculatorView {
         this.fanQuantity.value = '0';
     }
 
+    /**
+     * Filters dropdown options based on user input.
+     *
+     * @param {HTMLInputElement} input - Input fields.
+     * @param {HTMLOptionsCollection} options - Option elements.
+     * @param {HTMLElement} dropdownContent - Dropdown container.
+     */
     filterOptions(input, options, dropdownContent) {
         const searchText = input.value.toLowerCase();
         let hasMatches = false;
@@ -243,7 +291,7 @@ class PSCalculatorView {
         }
 
         dropdownContent.style.display = (searchText || input === document.activeElement) ? 'block' : 'none';
-        console.log('Filtering options:', { searchText, hasMatches, display: dropdownContent.style.display });
+        console.log('Filtering options:', {searchText, hasMatches, display: dropdownContent.style.display});
     }
 }
 
