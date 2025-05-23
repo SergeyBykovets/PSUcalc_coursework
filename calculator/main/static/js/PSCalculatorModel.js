@@ -1,47 +1,116 @@
+/**
+ * Model for calculating the total power consumption of a PC
+ * including CPU, GPU, RAM, PCI, drives, fans, etc.
+ */
+
 class PSCalculatorModel {
     constructor() {
-        this.cpu = { power: 0, overclock: false, overclockPercentage: 10, model: '' };
-        this.gpus = [{ power: 0, overclock: false, overclockPercentage: 10, model: '' }];
-        this.ram = { type: '', quantity: 0, powerPerModule: 0 };
-        this.pci = { x1: 0, x4: 0, x8: 0, x16: 0 };
-        this.storage = { hdd: 0, sataSsd: 0, m2Ssd: 0 };
-        this.opticalDrive = { type: '', power: 0 };
-        this.fans = { quantity: 0 };
+        /** @type {{power: number, overclock: boolean, overclockPercentage: number, model: string}} */
+        this.cpu = {power: 0, overclock: false, overclockPercentage: 10, model: ''};
+        /** @type {[{power: number, overclock: boolean, overclockPercentage: number, model: string}]} */
+        this.gpus = [{power: 0, overclock: false, overclockPercentage: 10, model: ''}];
+        /** @type {{type: string, quantity: number, powerPerModule: number}} */
+        this.ram = {type: '', quantity: 0, powerPerModule: 0};
+        /** @type {{x1: number, x4: number, x8: number, x16: number}} */
+        this.pci = {x1: 0, x4: 0, x8: 0, x16: 0};
+        /** @type {{hdd: number, sataSsd: number, m2Ssd: number}} */
+        this.storage = {hdd: 0, sataSsd: 0, m2Ssd: 0};
+        /** @type {{type: string, power: number}} */
+        this.opticalDrive = {type: '', power: 0};
+        /** @type {{quantity: number}} */
+        this.fans = {quantity: 0};
     }
 
+    /**
+     * Sets the main CPU specifications.
+     *
+     * @param {number} power - Power in watts.
+     * @param {string} model - CPU model name.
+     */
     setCpu(power, model) {
         this.cpu.power = power;
         this.cpu.model = model;
     }
 
+    /**
+     * Sets overclocking parameters for the CPU.
+     *
+     * @param {boolean} isOverclocked
+     * @param {number} percentage - Overclocking percentage.
+     */
     setCpuOverclock(isOverclocked, percentage) {
         this.cpu.overclock = isOverclocked;
         this.cpu.overclockPercentage = percentage;
     }
 
+    /**
+     * Adds a new GPU to the system.
+     *
+     * @param {number} power - GPU power in watts.
+     * @param {string} model - GPU model name.
+     */
     addGpu(power, model) {
-        this.gpus.push({ power, model, overclock: false, overclockPercentage: 10 });
+        this.gpus.push({power, model, overclock: false, overclockPercentage: 10});
     }
 
+    /**
+     * Sets the parameters of a specific GPU.
+     *
+     * @param {number} index - Index of the GPU in the list.
+     * @param {number} power
+     * @param {string} model
+     */
     setGpu(index, power, model) {
-        this.gpus[index] = { power, model, overclock: this.gpus[index]?.overclock || false, overclockPercentage: this.gpus[index]?.overclockPercentage || 10 };
+        this.gpus[index] = {
+            power,
+            model,
+            overclock: this.gpus[index]?.overclock || false,
+            overclockPercentage: this.gpus[index]?.overclockPercentage || 10
+        };
     }
 
+    /**
+     * Sets overclocking for a specific GPU.
+     *
+     * @param {number} index
+     * @param {boolean} isOverclocked
+     * @param {number} percentage
+     */
     setGpuOverclock(index, isOverclocked, percentage) {
         this.gpus[index].overclock = isOverclocked;
         this.gpus[index].overclockPercentage = percentage;
     }
 
+    /**
+     * Removes a GPU by index.
+     *
+     * @param {number} index
+     */
     removeGpu(index) {
         this.gpus.splice(index, 1);
     }
 
+    /**
+     * Sets the RAM configuration.
+     *
+     * @param {string} type - Type (means DDR*: like DDR4; DDR5).
+     * @param {number} quantity - Number of modules.
+     * @param {number} powerPerModule - Power consumption per module.
+     */
     setRam(type, quantity, powerPerModule) {
         this.ram.type = type;
         this.ram.quantity = quantity;
         this.ram.powerPerModule = powerPerModule;
     }
 
+    /**
+     * Sets the number of connected PCI devices by lane type.
+     *
+     * @param {number} x1
+     * @param {number} x4
+     * @param {number} x8
+     * @param {number} x16
+     */
     setPci(x1, x4, x8, x16) {
         this.pci.x1 = x1;
         this.pci.x4 = x4;
@@ -49,21 +118,44 @@ class PSCalculatorModel {
         this.pci.x16 = x16;
     }
 
+    /**
+     * Sets the number of storage devices by type.
+     *
+     * @param {number} hdd
+     * @param {number} sataSsd
+     * @param {number} m2Ssd
+     */
     setStorage(hdd, sataSsd, m2Ssd) {
         this.storage.hdd = hdd;
         this.storage.sataSsd = sataSsd;
         this.storage.m2Ssd = m2Ssd;
     }
 
+    /**
+     * Sets the optical drive.
+     *
+     * @param {type} type
+     * @param {number} power
+     */
     setOpticalDrive(type, power) {
         this.opticalDrive.type = type;
         this.opticalDrive.power = power;
     }
 
+    /**
+     * Sets the number of case fans.
+     *
+     * @param {number} quantity
+     */
     setFans(quantity) {
         this.fans.quantity = quantity;
     }
 
+    /**
+     * Calculates the total power consumption and recommended PSU wattage.
+     *
+     * @returns {{total: number, recommended: number}}
+     */
     calculatePower() {
         let total = 0;
 
@@ -94,17 +186,20 @@ class PSCalculatorModel {
         total += (this.fans.quantity || 0) * 5;
 
         const recommended = Math.ceil(total * 1.2);
-        return { total: Math.round(total), recommended };
+        return {total: Math.round(total), recommended};
     }
 
+    /**
+     * Resets the model to its initial state (all values set to defaults).
+     */
     reset() {
-        this.cpu = { power: 0, overclock: false, overclockPercentage: 10, model: '' };
-        this.gpus = [{ power: 0, overclock: false, overclockPercentage: 10, model: '' }];
-        this.ram = { type: '', quantity: 0, powerPerModule: 0 };
-        this.pci = { x1: 0, x4: 0, x8: 0, x16: 0 };
-        this.storage = { hdd: 0, sataSsd: 0, m2Ssd: 0 };
-        this.opticalDrive = { type: '', power: 0 };
-        this.fans = { quantity: 0 };
+        this.cpu = {power: 0, overclock: false, overclockPercentage: 10, model: ''};
+        this.gpus = [{power: 0, overclock: false, overclockPercentage: 10, model: ''}];
+        this.ram = {type: '', quantity: 0, powerPerModule: 0};
+        this.pci = {x1: 0, x4: 0, x8: 0, x16: 0};
+        this.storage = {hdd: 0, sataSsd: 0, m2Ssd: 0};
+        this.opticalDrive = {type: '', power: 0};
+        this.fans = {quantity: 0};
     }
 }
 
