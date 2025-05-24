@@ -198,7 +198,7 @@ class PSCalculatorView {
                             window.dispatchEvent(new CustomEvent('deleteGpu', {detail: {index: i}}));
                         });
                     }
-                    console.log(`Reindexed GPU block to index: ${i}`);
+                    console.log(`Reindex GPU block to index: ${i}`);
                 }
             });
         }

@@ -9,7 +9,7 @@ class PSCalculatorController {
      * binds UI events to handler methods.
      *
      * @param {Object} model - Instance of PSCalculatorModel.
-     * @param {Object} view - Instamce of PSCalculatorView.
+     * @param {Object} view - Instance of PSCalculatorView.
      */
     constructor(model, view) {
         this.model = model;
@@ -217,7 +217,7 @@ class PSCalculatorController {
         this.updatePower();
     }
 
-    /** Handles chenges in RAM configuration. */
+    /** Handles changes in RAM configuration. */
     onRamChange() {
         const powerPerModule = parseInt(this.view.ramType.selectedOptions[0]?.getAttribute('data-subtitle') || 0);
         this.model.setRam(this.view.ramType.value, parseInt(this.view.ramQuantity.value) || 0, powerPerModule);
