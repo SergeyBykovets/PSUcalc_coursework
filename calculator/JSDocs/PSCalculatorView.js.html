@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: PSCalculatorView.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: PSCalculatorView.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * View class for displaying UI components and handling DOM elements.
  * It updates the interface and manages UI elements.
  */
@@ -113,34 +141,34 @@ class PSCalculatorView {
         newGpuBlock.classList.add('form-group', 'dropdown-container', 'gpu-block');
         newGpuBlock.id = `gpuDropdownContainer${index}`;
         newGpuBlock.innerHTML = `
-            <div class="template__three-select-filters">
-                <div class="category">
-                    <div class="category__title category--show">
-                        <img src="${staticUrl}images/gpu2.png" />
-                        <div class="title__text">GPU</div>
-                    </div>
-                </div>
-                <div class="filter">
-                    <input type="text" id="gpuInput${index}" placeholder="Enter GPU Model" />
-                    <div class="dropdown-content" id="gpuDropdownContent${index}" style="display: none;">
-                        <select size="10" id="gpuOptions${index}" class="gpu-options">
+            &lt;div class="template__three-select-filters">
+                &lt;div class="category">
+                    &lt;div class="category__title category--show">
+                        &lt;img src="${staticUrl}images/gpu2.png" />
+                        &lt;div class="title__text">GPU&lt;/div>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div class="filter">
+                    &lt;input type="text" id="gpuInput${index}" placeholder="Enter GPU Model" />
+                    &lt;div class="dropdown-content" id="gpuDropdownContent${index}" style="display: none;">
+                        &lt;select size="10" id="gpuOptions${index}" class="gpu-options">
                             ${gpuOptionsHtml}
-                        </select>
-                    </div>
-                    <div class="overclock-section">
-                        <label>
-                            <input type="checkbox" id="gpuOverclockCheckbox${index}"> Overclock
-                        </label>
-                        <div class="overclock-slider" id="gpuOverclockSliderContainer${index}" style="display: none;">
-                            <label for="gpuOverclockPercentage${index}"> <span id="gpuOverclockValue${index}">10</span> % </label>
-                            <input type="range" id="gpuOverclockPercentage${index}" min="0" max="25" value="10">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="del__btn" id="delNewGpuOption${index}">
-                <button><i class="fas fa-trash-alt"></i> Delete</button>
-            </div>
+                        &lt;/select>
+                    &lt;/div>
+                    &lt;div class="overclock-section">
+                        &lt;label>
+                            &lt;input type="checkbox" id="gpuOverclockCheckbox${index}"> Overclock
+                        &lt;/label>
+                        &lt;div class="overclock-slider" id="gpuOverclockSliderContainer${index}" style="display: none;">
+                            &lt;label for="gpuOverclockPercentage${index}"> &lt;span id="gpuOverclockValue${index}">10&lt;/span> % &lt;/label>
+                            &lt;input type="range" id="gpuOverclockPercentage${index}" min="0" max="25" value="10">
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+            &lt;div class="del__btn" id="delNewGpuOption${index}">
+                &lt;button>&lt;i class="fas fa-trash-alt">&lt;/i> Delete&lt;/button>
+            &lt;/div>
         `;
         this.gpuContainer.appendChild(newGpuBlock);
         this.gpuBlocks[index] = newGpuBlock;
@@ -214,8 +242,8 @@ class PSCalculatorView {
         console.log('Updating UI with:', {total, recommended});
         // Завжди відображаємо "+20%" у тексті
         this.totalPower.innerHTML = `
-            The system consumes: <strong>${total || 0}W</strong><br>
-            Recommended power supply(+20%): <strong>${recommended || 0}W</strong>
+            The system consumes: &lt;strong>${total || 0}W&lt;/strong>&lt;br>
+            Recommended power supply(+20%): &lt;strong>${recommended || 0}W&lt;/strong>
         `;
     }
 
@@ -235,33 +263,33 @@ class PSCalculatorView {
         document.getElementById('cpuOverclockValue').textContent = '10';
         document.getElementById('cpuOverclockSliderContainer').style.display = 'none';
         this.gpuContainer.innerHTML = `
-            <div class="form-group dropdown-container gpu-block" id="gpuDropdownContainer0">
-                <div class="template__three-select-filters">
-                    <div class="category">
-                        <div class="category__title category--show">
-                            <img src="${staticUrl}images/gpu2.png" />
-                            <div class="title__text">GPU</div>
-                        </div>
-                    </div>
-                    <div class="filter">
-                        <input type="text" id="gpuInput0" placeholder="Enter GPU Model" />
-                        <div class="dropdown-content" id="gpuDropdownContent0" style="display: none;">
-                            <select size="10" id="gpuOptions0" class="gpu-options">
+            &lt;div class="form-group dropdown-container gpu-block" id="gpuDropdownContainer0">
+                &lt;div class="template__three-select-filters">
+                    &lt;div class="category">
+                        &lt;div class="category__title category--show">
+                            &lt;img src="${staticUrl}images/gpu2.png" />
+                            &lt;div class="title__text">GPU&lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                    &lt;div class="filter">
+                        &lt;input type="text" id="gpuInput0" placeholder="Enter GPU Model" />
+                        &lt;div class="dropdown-content" id="gpuDropdownContent0" style="display: none;">
+                            &lt;select size="10" id="gpuOptions0" class="gpu-options">
                                 ${gpuOptionsHtml}
-                            </select>
-                        </div>
-                        <div class="overclock-section">
-                            <label>
-                                <input type="checkbox" id="gpuOverclockCheckbox0"> Overclock
-                            </label>
-                            <div class="overclock-slider" id="gpuOverclockSliderContainer0" style="display: none;">
-                                <label for="gpuOverclockPercentage0"> <span id="gpuOverclockValue0">10</span> % </label>
-                                <input type="range" id="gpuOverclockPercentage0" min="0" max="25" value="10">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            &lt;/select>
+                        &lt;/div>
+                        &lt;div class="overclock-section">
+                            &lt;label>
+                                &lt;input type="checkbox" id="gpuOverclockCheckbox0"> Overclock
+                            &lt;/label>
+                            &lt;div class="overclock-slider" id="gpuOverclockSliderContainer0" style="display: none;">
+                                &lt;label for="gpuOverclockPercentage0"> &lt;span id="gpuOverclockValue0">10&lt;/span> % &lt;/label>
+                                &lt;input type="range" id="gpuOverclockPercentage0" min="0" max="25" value="10">
+                            &lt;/div>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
         `;
         this.gpuBlocks = [this.gpuContainer.querySelector('#gpuDropdownContainer0')];
         this.ramType.value = '';
@@ -283,7 +311,7 @@ class PSCalculatorView {
         const searchText = input.value.toLowerCase();
         let hasMatches = false;
 
-        for (let i = 0; i < options.length; i++) {
+        for (let i = 0; i &lt; options.length; i++) {
             const optionText = options[i].text.toLowerCase();
             const matches = optionText.includes(searchText);
             options[i].style.display = matches ? '' : 'none';
@@ -295,4 +323,26 @@ class PSCalculatorView {
     }
 }
 
-export default PSCalculatorView;
+export default PSCalculatorView;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-main.html">main</a></li></ul><h3>Classes</h3><ul><li><a href="PSCalculatorController.html">PSCalculatorController</a></li><li><a href="PSCalculatorModel.html">PSCalculatorModel</a></li><li><a href="PSCalculatorView.html">PSCalculatorView</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun May 25 2025 17:02:47 GMT+0300 (за східноєвропейським літнім часом)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
