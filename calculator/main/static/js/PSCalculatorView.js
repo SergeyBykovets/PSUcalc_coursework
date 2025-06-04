@@ -264,7 +264,7 @@ class PSCalculatorView {
             </div>
         `;
         this.gpuBlocks = [this.gpuContainer.querySelector('#gpuDropdownContainer0')];
-        this.ramType.value = 'DDR3';
+        this.ramType.value = 'DDR4';
         this.ramQuantity.value = '0';
         this.pciQuantities.forEach((input) => (input.value = '0'));
         this.storageQuantities.forEach((input) => (input.value = '0'));
